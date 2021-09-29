@@ -121,7 +121,7 @@ global:
   image:
     repository: pingidentity
     name:
-    tag: "edge"
+    tag: "2108"
     pullPolicy: IfNotPresent
 
   ############################################################
@@ -725,7 +725,7 @@ pingdirectory:
   envs:
     SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
     SERVER_PROFILE_PATH: baseline/pingdirectory
-    MAKELDIF_USERS: "20000"
+    MAKELDIF_USERS: "10"
 
   services:
     ldap:
@@ -735,7 +735,6 @@ pingdirectory:
     ldaps:
       servicePort: 636
       containerPort: 1636
-      ingressPort: 636
       dataService: true
       clusterService: true
     https:
@@ -758,101 +757,15 @@ pingdirectory:
         hosts:
           - pingdirectory._defaultDomain_
 
-#############################################################
-# pingdelegator values
-#############################################################
-pingdelegator:
-  enabled: false
-  name: pingdelegator
-  image:
-    name: pingdelegator
-
-  container:
-    resources:
-      requests:
-        cpu: 0
-        memory: 32Mi
-      limits:
-        cpu: 500m
-        memory: 64Mi
-
-  publicPort: 443
-
-  tokenProvider:
-    port: 9031
-    clientId: dadmin
-
-  pingDirectoryServer:
-    port: 443
-
-  envs:
-    SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
-    SERVER_PROFILE_PATH: baseline/pingdelegator
-
-  services:
-    https:
-      servicePort: 6443
-      containerPort: 6443
-      ingressPort: 443
-      dataService: true
-
-  ingress:
-    hosts:
-      - host: pingdelegator._defaultDomain_
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            serviceName: https
-    tls:
-      - secretName: _defaultTlsSecret_
-        hosts:
-          - pingdelegator._defaultDomain_
-
-#############################################################
-# pingdatasync values
-#############################################################
-pingdatasync:
-  enabled: false
-  name: pingdatasync
-  image:
-    name: pingdatasync
-
-  container:
-    resources:
-      requests:
-        cpu: 0
-        memory: .75Gi
-      limits:
-        cpu: 2
-        memory: 2Gi
-
-  envs:
-    SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
-    SERVER_PROFILE_PATH: simple-sync/pingdatasync
-
-  services:
-    ldaps:
-      servicePort: 636
-      containerPort: 1636
-      clusterService: true
-    https:
-      servicePort: 443
-      containerPort: 1443
-      dataService: true
-    clusterServiceName: pingdatasync-cluster
 
 #############################################################
 # pingaccess-admin values
 #############################################################
 pingaccess-admin:
-  enabled: false
+  enabled: true
   name: pingaccess-admin
   image:
     name: pingaccess
-
-  workload:
-    type: StatefulSet
 
   container:
     resources:
@@ -875,6 +788,18 @@ pingaccess-admin:
   envs:
     SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
     SERVER_PROFILE_PATH: getting-started/pingaccess
+    OPERATIONAL_MODE: STANDALONE
+
+  workload:
+    type: StatefulSet
+    statefulSet:
+      persistentvolume:
+        volumes:
+          out-dir:
+            persistentVolumeClaim:
+              resources:
+                requests:
+                  storage: 8Gi
 
   services:
     https:
@@ -882,10 +807,15 @@ pingaccess-admin:
       containerPort: 9000
       ingressPort: 443
       dataService: true
-    clusterconfig:
-      servicePort: 9090
-      containerPort: 9090
+    engine:
+      servicePort: 3000
+      containerPort: 3000
+      ingressPort: 443
       dataService: true
+  # clusterconfig:
+  #   servicePort: 9090
+  #   containerPort: 9090
+  #   dataService: true
 
   ingress:
     hosts:
@@ -895,10 +825,16 @@ pingaccess-admin:
           pathType: Prefix
           backend:
             serviceName: https
+      - host: pingaccess-engine._defaultDomain_
+        paths:
+        - path: /
+          backend:
+            serviceName: engine
     tls:
       - secretName: _defaultTlsSecret_
         hosts:
           - pingaccess-admin._defaultDomain_
+          - pingaccess-engine._defaultDomain_
 
 #############################################################
 # pingaccess-engine values
@@ -1008,108 +944,3 @@ pd-replication-timing:
     SERVER_PROFILE_PATH: dsreplication-timing
     STARTUP_COMMAND: /opt/out/instance/bin/start-server
     STARTUP_BACKGROUND_OPTS: ""
-
-
-#############################################################
-# testFramework
-#############################################################
-testFramework:
-  # Disabled by default
-  enabled: false
-  name: testframework
-  sharedMountPath: /var/run/shared
-
-  #########################################################
-  # If rbac is enabled, this will create:
-  #   - serviceAccount
-  #   - role
-  #   - roleBinding (between serviceAccount and role)
-  #
-  # and apply the serviceAccount to the pod in the tests.
-  # The names for these resources will be named using the
-  # naming rules for all resources including the ReleaseName
-  #########################################################
-  rbac:
-    enabled: true
-    role:
-      rules:
-      - apiGroups:
-        - '*'
-        resources:
-        - '*'
-        verbs:
-        - '*'
-
-  testConfigMaps:
-    prefix: ping-devops-test-
-    volumeMountPath: /var/run/
-    #########################################################
-    # Array of configmap names (prefixed with prefix above)
-    # Example includes:
-    #########################################################
-    # files:
-    #   - init-test.sh
-    #   - check-pingfederate.postman-collection.json
-    #   - generated.postman-environment.json
-
-  testSteps: []
-    #########################################################
-    # Array of steps.
-    # Example includes:
-    #
-    # waitFor - Example below will create 2 init containers:
-    #           - 01-wait-for-pingfederate-admin
-    #           - 01-wait-for-pingfederate-engine
-    #########################################################
-    # - name: 01-wait-for
-    #   waitFor:
-    #     pingfederate-admin:
-    #       service: https
-    #     pingfederate-engine:
-    #       service: https
-
-    # - name: 02-init-test
-    #   image: busybox
-    #   command:
-    #     - /bin/sh
-    #     - /var/run/init-test.sh
-
-    # - name: 03-check-pingfederate
-    #   image: postman/newman:5-alpine
-    #   command:
-    #     - newman
-    #     - run
-    #     - /var/run/check-pingfederate.postman-collection.json
-    #     - --environment
-    #     - /var/run/generated.postman-environment.json
-    #     - --insecure
-    #     - --ignore-redirects
-
-  finalStep:
-    name: 99-completion
-    image: busybox
-    imagePullPolicy: IfNotPresent
-    command:
-      - /bin/sh
-      - -c
-      - echo "*************************************"; echo "Testing Complete"; date; echo "*************************************";
-      - exit 0
-    resources:
-      limits:
-        cpu: 500m
-        memory: 128Mi
-      requests:
-        cpu: 1m
-        memory: 64Mi
-
-  #########################################################
-  # Pod information to include
-  #
-  # Examples:
-  #   securityContext for all containers
-  #########################################################
-  pod:
-    securityContext:
-      runAsUser: 1000
-      runAsGroup: 2000
-
