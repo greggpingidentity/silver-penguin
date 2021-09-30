@@ -5,7 +5,7 @@
         <urn:Grant type="refresh_token"/>
         <urn:Grant type="implicit"/>
         <urn:Grant type="authorization_code"/>
-        <urn:RedirectUri>https://silver-penguin-pingaccess-engine.ping-devops.com/pa/oidc/cb</urn:RedirectUri>
+        <urn:RedirectUri>https://${RELEASE_NAME}-pingaccess-engine.${RELEASE_HOST}/pa/oidc/cb</urn:RedirectUri>
         <urn:SupplementalInfo key="DEVICE_FLOW_SETTING" value="SERVER_DEFAULT"/>
         <urn:SupplementalInfo key="RESTRICT_RESPONSE_TYPES" value="false"/>
         <urn:SupplementalInfo key="ACCESS_SESSION_MANAGEMENT_API" value="false"/>

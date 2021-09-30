@@ -30,7 +30,8 @@ global:
   #       configmaps (i.e. global-env-vars and product-env-vars)
   ############################################################
   envs: {
-    GREGG_RELEASE_NAME: silver
+    RELEASE_NAME: silver-penguin-gregg,
+    RELEASE_HOST: ping-devops.com
   }
 
   ############################################################
