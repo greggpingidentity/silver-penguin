@@ -502,8 +502,8 @@ pingfederate-admin:
   #       timeoutSeconds: 300
 
   envs:
-    SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
-    SERVER_PROFILE_PATH: getting-started/pingfederate
+    SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
+    SERVER_PROFILE_PATH: server-profiles/pingfederate
     OPERATIONAL_MODE: STANDALONE
     #PF_CONSOLE_AUTHENTICATION: NATIVE
     #PF_OIDC_CLIENT_ID: 087f2dcb-e4f5-42c8-a246-e440d9f51624
@@ -595,8 +595,8 @@ pingfederate-engine:
         timeoutSeconds: 300
 
   envs:
-    SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
-    SERVER_PROFILE_PATH: getting-started/pingfederate
+    SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
+    SERVER_PROFILE_PATH: server-profiles/pingfederate
     PF_ADMIN_PORT: "9999"
 
   #############################################################
@@ -723,8 +723,8 @@ pingdirectory:
                   storage: 8Gi
 
   envs:
-    SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
-    SERVER_PROFILE_PATH: baseline/pingdirectory
+    SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
+    SERVER_PROFILE_PATH: server-profiles/pingdirectory
     MAKELDIF_USERS: "10"
 
   services:
@@ -786,8 +786,8 @@ pingaccess-admin:
   #       timeoutSeconds: 300
 
   envs:
-    SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
-    SERVER_PROFILE_PATH: getting-started/pingaccess
+    SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
+    SERVER_PROFILE_PATH: server-profiles/pingaccess
     OPERATIONAL_MODE: STANDALONE
 
   workload:
@@ -859,8 +859,8 @@ pingaccess-engine:
         timeoutSeconds: 300
 
   envs:
-    SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
-    SERVER_PROFILE_PATH: getting-started/pingaccess
+    SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
+    SERVER_PROFILE_PATH: server-profiles/pingaccess
 
   services:
     https:
