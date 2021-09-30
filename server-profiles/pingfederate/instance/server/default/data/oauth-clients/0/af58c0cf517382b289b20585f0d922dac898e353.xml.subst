@@ -2,10 +2,10 @@
 <urn:Clients xmlns:urn="urn:pingidentity.com:pf:oauth:client">
     <urn:Client client_id="PingLogon" name="OIDC Sample Flows" logo="" secret="yQPou-UxFkAz4ER58Jvh7steczBQQaW_GfE3bYQxtWg.avSOGuFI.2" persistentGrantExpirationTime="0" enabled="true" lastModified="2021-09-28T19:36:43.837Z" bypassApprovalPage="true" restrictScopes="false" jwksUri="" jwks="" clientAuthnType="SECRET" enforceOneTimeJWT="false" isRequireSignedRequest="false">
         <urn:Description><![CDATA[Authorization Code Flow:
-https://${GREGG_RELEASE_NAME}-pingfederate-engine.ping-devops.com/as/authorization.oauth2?response_type=code&client_id=PingLogon&redirect_uri=https://decoder.pingidentity.cloud/oidc&scope=openid%20profile%20email%20phone%20address
+https://${RELEASE_NAME}-pingfederate-engine.${RELEASE_HOST}/as/authorization.oauth2?response_type=code&client_id=PingLogon&redirect_uri=https://decoder.pingidentity.cloud/oidc&scope=openid%20profile%20email%20phone%20address
 
 Implicit Flow:
-https://${GGG_RELEASE_NAME}-pingfederate-engine.ping-devops.com/as/authorization.oauth2?response_type=token+id_token&client_id=PingLogon&redirect_uri=https%3A%2F%2Fdecoder.pingidentity.cloud%2Fimplicit&scope=openid+profile+email+phone+address&nonce=28ffgc1]]></urn:Description>
+https://${RELEASE_NAME}-pingfederate-engine.${RELEASE_HOST}/as/authorization.oauth2?response_type=token+id_token&client_id=PingLogon&redirect_uri=https%3A%2F%2Fdecoder.pingidentity.cloud%2Fimplicit&scope=openid+profile+email+phone+address&nonce=28ffgc1]]></urn:Description>
         <urn:Grant type="refresh_token"/>
         <urn:Grant type="implicit"/>
         <urn:Grant type="authorization_code"/>
