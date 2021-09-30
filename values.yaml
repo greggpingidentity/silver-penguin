@@ -786,8 +786,10 @@ pingaccess-admin:
   #       timeoutSeconds: 300
 
   envs:
-    SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
-    SERVER_PROFILE_PATH: server-profiles/pingaccess
+    SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
+    SERVER_PROFILE_PATH: getting-started/pingaccess
+    #SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
+    #SERVER_PROFILE_PATH: server-profiles/pingaccess
     OPERATIONAL_MODE: STANDALONE
 
   workload:
@@ -859,8 +861,10 @@ pingaccess-engine:
         timeoutSeconds: 300
 
   envs:
-    SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
-    SERVER_PROFILE_PATH: server-profiles/pingaccess
+    SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
+    SERVER_PROFILE_PATH: getting-started/pingaccess
+    #SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
+    #SERVER_PROFILE_PATH: server-profiles/pingaccess
 
   services:
     https:
