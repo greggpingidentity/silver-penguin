@@ -139,6 +139,47 @@
     },
     "httpMonitoring": { "auditLevel": "OFF" },
     "httpProtocolSource": { "headerName": "X-Forwarded-Proto" },
+    "httpsListeners": [
+      {
+          "id": 1,
+          "name": "ADMIN",
+          "keyPairId": 1,
+          "useServerCipherSuiteOrder": true,
+          "restartRequired": false
+      },
+      {
+          "id": 2,
+          "name": "ENGINE",
+          "keyPairId": 1,
+          "useServerCipherSuiteOrder": true,
+          "restartRequired": false
+      },
+      {
+          "id": 3,
+          "name": "AGENT",
+          "keyPairId": 1,
+          "useServerCipherSuiteOrder": true,
+          "restartRequired": false
+      },
+      {
+          "id": 4,
+          "name": "CONFIG QUERY",
+          "keyPairId": 1,
+          "useServerCipherSuiteOrder": true,
+          "restartRequired": false
+      }
+  ],
+  "keyPairs": [
+      {
+          "id": 1,
+          "alias": "PRIVATE HOSTNAME CERT",
+          "fileData": "${PRIVATE_KEYSTORE}",
+          "password": {
+              "value": "${PRIVATE_KEYSTORE_PIN}"
+          },
+          "hsmProviderId": 0
+      }
+  ],
     "identityMappings": [
       {
         "className": "com.pingidentity.pa.identitymappings.HeaderIdentityMapping",
