@@ -139,43 +139,6 @@
     },
     "httpMonitoring": { "auditLevel": "OFF" },
     "httpProtocolSource": { "headerName": "X-Forwarded-Proto" },
-    "httpsListeners": [
-      {
-        "id": 1,
-        "name": "ADMIN",
-        "keyPairId": 1,
-        "useServerCipherSuiteOrder": true,
-        "restartRequired": false
-      },
-      {
-        "id": 2,
-        "name": "ENGINE",
-        "keyPairId": 2,
-        "useServerCipherSuiteOrder": true,
-        "restartRequired": false
-      },
-      {
-        "id": 3,
-        "name": "AGENT",
-        "keyPairId": 3,
-        "useServerCipherSuiteOrder": true,
-        "restartRequired": false
-      },
-      {
-        "id": 4,
-        "name": "CONFIG QUERY",
-        "keyPairId": 4,
-        "useServerCipherSuiteOrder": true,
-        "restartRequired": false
-      },
-      {
-        "id": 5,
-        "name": "SIDEBAND",
-        "keyPairId": 5,
-        "useServerCipherSuiteOrder": true,
-        "restartRequired": false
-      }
-    ],
     "identityMappings": [
       {
         "className": "com.pingidentity.pa.identitymappings.HeaderIdentityMapping",
@@ -224,7 +187,7 @@
     "pingFederateAdmin": {
       "adminUsername": "Administrator",
       "adminPassword": {
-        "encryptedValue": "OBF:JWE:eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2Iiwia2lkIjoiODdzWWNmMlRySzAySEhUUyJ9..SeAuB2OlMNAbrhRj_3L1VA.OIsFEJ_wxopER0v4eVVOjg.0gYRIoDekTYXg0dWHqRC2A"
+        "value": "2FederateM0re"
       },
       "skipHostnameVerification": false,
       "expectedHostname": null,
