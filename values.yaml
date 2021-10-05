@@ -322,7 +322,7 @@ pingdirectory:
 # pingaccess-admin values
 #############################################################
 pingaccess-admin:
-  enabled: true
+  enabled: false
   name: pingaccess-admin
   image:
     name: pingaccess

@@ -1,9 +1,12 @@
 Authorization Code Flow:
+https://${RELEASE_NAME}-pingfederate-engine.ping-devops.com/as/authorization.oauth2?response_type=code&client_id=PingLogon&redirect_uri=https://decoder.pingidentity.cloud/oidc&scope=openid%20profile%20email%20phone%20address
+example:
 https://silver-penguin-pingfederate-engine.ping-devops.com/as/authorization.oauth2?response_type=code&client_id=PingLogon&redirect_uri=https://decoder.pingidentity.cloud/oidc&scope=openid%20profile%20email%20phone%20address
 
 Implicit Flow:
+https://${RELEASE_NAME}-pingfederate-engine.ping-devops.com/as/authorization.oauth2?response_type=token+id_token&client_id=PingLogon&redirect_uri=https%3A%2F%2Fdecoder.pingidentity.cloud%2Fimplicit&scope=openid+profile+email+phone+address&nonce=28ffgc1
+example:
 https://silver-penguin-pingfederate-engine.ping-devops.com/as/authorization.oauth2?response_type=token+id_token&client_id=PingLogon&redirect_uri=https%3A%2F%2Fdecoder.pingidentity.cloud%2Fimplicit&scope=openid+profile+email+phone+address&nonce=28ffgc1
-
 
 
 
