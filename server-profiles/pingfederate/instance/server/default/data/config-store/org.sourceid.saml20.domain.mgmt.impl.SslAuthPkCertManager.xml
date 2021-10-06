@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <con:config xmlns:con="http://www.sourceid.org/2004/05/config">
     <con:map name="decoder.pingidentity.cloud"/>
+    <con:map name="https://auth.pingone.com/4d03914a-5c4a-4fd2-8ebd-f97c277373b5"/>
 </con:config>
