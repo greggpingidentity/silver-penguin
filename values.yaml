@@ -1,28 +1,7 @@
 ############################################################
-# Ping Identity DevOps values.yaml
-############################################################
-# The yaml is seperated into 2 major sections:
-#  - global - Represents the base set of values that will
-#             be used for each product, if that product
-#             doesn't override the global values.
-#
-#  - image  - For every image/product, the values will
-#             be merged with the global settings, and
-#             take precedence.
-############################################################
-
-############################################################
 # Global values
 ############################################################
 global:
-  ############################################################
-  # envs - Environment variables listed will be added to the
-  #        global-env-vars configmap.
-  #
-  # NOTE: Environment variables listed at the global: level
-  #       will actually end up being listed twice in the
-  #       configmaps (i.e. global-env-vars and product-env-vars)
-  ############################################################
   envs: {
     RELEASE_NAME: silver-penguin,
     RELEASE_HOST: ping-devops.com
@@ -46,65 +25,16 @@ global:
     tag: "2108"
     pullPolicy: IfNotPresent
 
-    ############################################################
-    # Probes
-    #
-    # Probes have a number of fields that you can use to more precisely control the
-    # behavior of liveness and readiness checks.
-    #
-    # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
-    ############################################################
-    probes:
-      livenessProbe:
-        exec:
-          command:
-            - /opt/liveness.sh
-        initialDelaySeconds: 30
-        periodSeconds: 30
-        timeoutSeconds: 5
-        successThreshold: 1
-        failureThreshold: 4
-      readinessProbe:
-        exec:
-          command:
-            - /opt/readiness.sh
-        initialDelaySeconds: 30
-        periodSeconds: 5
-        timeoutSeconds: 5
-        successThreshold: 1
-        failureThreshold: 4
-      startupProbe:
-        exec:
-          command:
-            - /opt/liveness.sh
-        periodSeconds: 10
-        timeoutSeconds: 5
-        failureThreshold: 90
-
-  ############################################################
-  # Licensing
-  #
-  # license.secret.devOps
-  #    Identify the k8s secret to keep the DevOps USER/KEY if used during deployement.
-  #
-  # NOTE: licenseSecretName can be set in deploying chart values to specify a secret
-  #       with actual product license.  This would override the DevOps secret.
-  #
-  # Using pingctl utility (brew install pingctl):
-  #    pingctl k8s generate devops-secret | kubectl apply -f -
-  ############################################################
   license:
     secret:
       devOps: devops-secret
 
   
 #############################################################
-# Image/Product values
+# Images
 #############################################################
 
-#############################################################
-# pingfederate-admin values
-#############################################################
+# pingfederate-admin
 pingfederate-admin:
   enabled: true
   name: pingfederate-admin
@@ -135,23 +65,7 @@ pingfederate-admin:
     SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
     SERVER_PROFILE_PATH: server-profiles/pingfederate
     OPERATIONAL_MODE: STANDALONE
-    #PF_CONSOLE_AUTHENTICATION: NATIVE
-    #PF_OIDC_CLIENT_ID: 087f2dcb-e4f5-42c8-a246-e440d9f51624
-    #PF_OIDC_CLIENT_SECRET: EMfze~JXXo.UhWoiXq.a3Xm~nN~Bga2EmzuCVLFcHO43LMi_qsPTC32OzfL8UbMI
-    #PF_OIDC_AUTHORIZATION_ENDPOINT: https://auth.pingone.com/4d03914a-5c4a-4fd2-8ebd-f97c277373b5/as/authorize
-    #PF_OIDC_TOKEN_ENDPOINT: https://auth.pingone.com/4d03914a-5c4a-4fd2-8ebd-f97c277373b5/as/token
-    #PF_OIDC_USER_INFO_ENDPOINT: https://auth.pingone.com/4d03914a-5c4a-4fd2-8ebd-f97c277373b5/as/userinfo
-    #PF_OIDC_END_SESSION_ENDPOINT: https://auth.pingone.com/4d03914a-5c4a-4fd2-8ebd-f97c277373b5/as/revoke
-    #PF_OIDC_ISSUER: https://auth.pingone.com/4d03914a-5c4a-4fd2-8ebd-f97c277373b5/as
-    #PF_OIDC_CLIENT_AUTHN_METHOD: client_secret_basic
-    #PF_OIDC_SCOPES: openid email profile
-    #PF_OIDC_USERNAME_ATTRIBUTE_NAME: name
-    #PF_OIDC_ROLE_ATTRIBUTE_NAME: pf_admin_roles
-    #PF_OIDC_ROLE_ADMIN: fullAdmin
-    #PF_OIDC_ROLE_CRYPTOMANAGER: fullAdmin
-    #PF_OIDC_ROLE_USERADMIN: fullAdmin
-    #PF_OIDC_ROLE_EXPRESSIONADMIN: fullAdmin
-    #PF_OIDC_ACR_VALUES: ""
+    PF_CONSOLE_AUTHENTICATION: NATIVE
 
   services:
     https:
@@ -185,10 +99,7 @@ pingfederate-admin:
           - pingfederate-admin._defaultDomain_
           - pingfederate-engine._defaultDomain_
 
-
-#############################################################
-# pingfederate-engine values
-#############################################################
+# pingfederate-engine 
 # pingfederate-engine:
 #   enabled: false
 #   name: pingfederate-engine
@@ -242,9 +153,7 @@ pingfederate-admin:
 #         hosts:
 #           - pingfederate-engine._defaultDomain_
 
-#############################################################
-# pingdirectory values
-#############################################################
+# pingdirectory
 pingdirectory:
   enabled: true
   name: pingdirectory
@@ -262,14 +171,6 @@ pingdirectory:
         memory: 8Gi
 
     terminationGracePeriodSeconds: 300
-
-    probes:
-      readinessProbe:
-        periodSeconds: 30
-        failureThreshold: 4
-      startupProbe:
-        periodSeconds: 10
-        failureThreshold: 180
 
   workload:
     type: StatefulSet
@@ -322,37 +223,28 @@ pingdirectory:
 # pingaccess-admin values
 #############################################################
 pingaccess-admin:
-  enabled: false
+  enabled: true
   name: pingaccess-admin
   image:
     name: pingaccess
 
-  # container:
-  #   resources:
-  #     requests:
-  #       cpu: 0
-  #       memory: 1Gi
-  #     limits:
-  #       cpu: 2
-  #       memory: 4Gi
-
   envs:
-    # SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
-    # SERVER_PROFILE_PATH: getting-started/pingaccess
-    SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
-    SERVER_PROFILE_PATH: server-profiles/pingaccess
+    SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
+    SERVER_PROFILE_PATH: baseline/pingaccess
+    # SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
+    # SERVER_PROFILE_PATH: server-profiles/pingaccess
     OPERATIONAL_MODE: STANDALONE
 
-  # workload:
-  #   type: StatefulSet
-  #   statefulSet:
-  #     persistentvolume:
-  #       volumes:
-  #         out-dir:
-  #           persistentVolumeClaim:
-  #             resources:
-  #               requests:
-  #                 storage: 8Gi
+  workload:
+    type: StatefulSet
+    statefulSet:
+      persistentvolume:
+        volumes:
+          out-dir:
+            persistentVolumeClaim:
+              resources:
+                requests:
+                  storage: 4Gi
 
   services:
     https:
@@ -365,10 +257,6 @@ pingaccess-admin:
       containerPort: 3000
       ingressPort: 443
       dataService: true
-  # clusterconfig:
-  #   servicePort: 9090
-  #   containerPort: 9090
-  #   dataService: true
 
   ingress:
     hosts:
@@ -389,9 +277,7 @@ pingaccess-admin:
           - pingaccess-admin._defaultDomain_
           - pingaccess-engine._defaultDomain_
 
-#############################################################
 # pingaccess-engine values
-#############################################################
 # pingaccess-engine:
 #   enabled: false
 #   name: pingaccess-engine
@@ -437,9 +323,7 @@ pingaccess-admin:
 #         hosts:
 #           - pingaccess-engine._defaultDomain_
 
-#############################################################
-# pingdataconsole values
-#############################################################
+# pingdataconsole
 pingdataconsole:
   enabled: true
   name: pingdataconsole
