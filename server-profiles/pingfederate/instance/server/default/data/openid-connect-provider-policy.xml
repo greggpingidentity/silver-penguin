@@ -26,7 +26,7 @@
         <urn:UserInfoMapping>
             <urn1:AttributeMap Name="sub" Type="Token" Value="sub" xmlns:urn1="urn:sourceid.org:saml2:metadata-extension:v2"/>
             <urn1:AttributeMap Name="name" Type="LDAP" AttributeSourceId="PD" Value="cn" xmlns:urn1="urn:sourceid.org:saml2:metadata-extension:v2"/>
-            <urn1:AttributeMap Name="groups" Type="LDAP" AttributeSourceId="PD" Value="isMemberOf" xmlns:urn1="urn:sourceid.org:saml2:metadata-extension:v2"/>
+            <urn1:AttributeMap Name="groups" Type="Expression" Value="#this.get(&quot;ds.PD.isMemberOf&quot;).toString().replaceAll(&quot;\\[|\\]&quot;,&quot;&quot;).split(&quot;,\\s&quot;).{?matches(&quot;cn=PF*&quot;)}" xmlns:urn1="urn:sourceid.org:saml2:metadata-extension:v2"/>
             <urn1:AttributeMap Name="phone_number" Type="LDAP" AttributeSourceId="PD" Value="mobile" xmlns:urn1="urn:sourceid.org:saml2:metadata-extension:v2"/>
             <urn1:AttributeMap Name="address.formatted" Type="LDAP" AttributeSourceId="PD" Value="postalAddress" xmlns:urn1="urn:sourceid.org:saml2:metadata-extension:v2"/>
             <urn1:AttributeMap Name="preferred_username" Type="LDAP" AttributeSourceId="PD" Value="uid" xmlns:urn1="urn:sourceid.org:saml2:metadata-extension:v2"/>
