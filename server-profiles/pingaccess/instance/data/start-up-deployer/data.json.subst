@@ -3,7 +3,7 @@
   "data": {
       "acmeDefaultServer": {
           "id": "8572f98e-482e-41c2-8a3d-6a0b2fc99734",
-          "location": "https://silver-penguin-pingaccess-admin.ping-devops.com:443/pa-admin-api/v3/acme/servers/8572f98e-482e-41c2-8a3d-6a0b2fc99734"
+          "location": "${PA_ADMIN_PUBLIC_HOSTNAME}:443/pa-admin-api/v3/acme/servers/8572f98e-482e-41c2-8a3d-6a0b2fc99734"
       },
       "acmeServers": [
           {
@@ -45,7 +45,7 @@
               "lastModified": 1634234400377,
               "requireHTTPS": true,
               "name": "Sample Headers",
-              "description": "",
+              "description": "${PA_ENGINE_PUBLIC_HOSTNAME}/headers",
               "manualOrderingEnabled": false,
               "resourceOrder": [],
               "applicationType": "Web",
@@ -215,7 +215,7 @@
           "skipHostnameVerification": false,
           "expectedHostname": null,
           "basePath": null,
-          "host": "silver-penguin-pingfederate-admin.ping-devops.com",
+          "host": "${PF_ADMIN_PRIVATE_HOSTNAME}",
           "port": 443,
           "trustedCertificateGroupId": 2,
           "auditLevel": "OFF",
@@ -245,7 +245,7 @@
       },
       "pingFederateRuntime": {
           "description": null,
-          "issuer": "https://silver-penguin-pingfederate-engine.ping-devops.com",
+          "issuer": "${PF_ENGINE_PRIVATE_HOSTNAME}",
           "trustedCertificateGroupId": 2,
           "useProxy": false,
           "useSlo": false,
@@ -375,7 +375,7 @@
           },
           {
               "id": 3,
-              "host": "silver-penguin-pingaccess-engine.ping-devops.com",
+              "host": "${PA_ENGINE_PUBLIC_HOSTNAME}",
               "port": 443,
               "agentResourceCacheTTL": 900,
               "keyPairId": 0,
