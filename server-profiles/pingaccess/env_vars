@@ -13,5 +13,5 @@
 #   export NAME=${NAME:-OTHER_VAR}       # Sets ot value of OTHER_VAR variable
 # 
 
-export PA_LOG_LEVEL=${PA_LOG_LEVEL:=INFO}
+export PA_LOG_LEVEL=${PA_LOG_LEVEL:=DEBUG}
 export PING_IDENTITY_PASSWORD=${PING_IDENTITY_PASSWORD:-2FederateM0re}
