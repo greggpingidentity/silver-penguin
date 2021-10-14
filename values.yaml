@@ -227,6 +227,12 @@ pingaccess-admin:
   name: pingaccess-admin
   image:
     name: pingaccess
+      
+  container:
+    waitFor:
+      pingfederate-admin:
+        service: engine
+        timeoutSeconds: 900
 
   envs:
     # SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
