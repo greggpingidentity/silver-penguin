@@ -225,16 +225,14 @@ pingdirectory:
 pingaccess-admin:
   enabled: true
   name: pingaccess-admin
-  privateCert:
-    generate: true
   image:
     name: pingaccess
 
   envs:
-    # SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
-    # SERVER_PROFILE_PATH: getting-started/pingaccess
-    SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
-    SERVER_PROFILE_PATH: server-profiles/pingaccess
+    SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
+    SERVER_PROFILE_PATH: getting-started/pingaccess
+    # SERVER_PROFILE_URL: https://github.com/greggpingidentity/silver-penguin.git
+    # SERVER_PROFILE_PATH: server-profiles/pingaccess
     OPERATIONAL_MODE: STANDALONE
 
   workload:
