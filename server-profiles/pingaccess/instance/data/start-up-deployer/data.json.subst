@@ -245,7 +245,7 @@
       },
       "pingFederateRuntime": {
           "description": null,
-          "issuer": "${PF_ENGINE_PRIVATE_HOSTNAME}",
+          "issuer": "${PF_ENGINE_PUBLIC_HOSTNAME}",
           "trustedCertificateGroupId": 2,
           "useProxy": false,
           "useSlo": false,
