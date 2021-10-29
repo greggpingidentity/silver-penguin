@@ -3,7 +3,7 @@
   "data": {
       "acmeDefaultServer": {
           "id": "8572f98e-482e-41c2-8a3d-6a0b2fc99734",
-          "location": "${PA_ADMIN_PUBLIC_HOSTNAME}:443/pa-admin-api/v3/acme/servers/8572f98e-482e-41c2-8a3d-6a0b2fc99734"
+          "location": "${PA_ADMIN_PUBLIC_HOSTNAME}::${PA_ADMIN_PUBLIC_PORT_HTTPS}/pa-admin-api/v3/acme/servers/8572f98e-482e-41c2-8a3d-6a0b2fc99734"
       },
       "acmeServers": [
           {
@@ -45,7 +45,7 @@
               "lastModified": 1634234400377,
               "requireHTTPS": true,
               "name": "Sample Headers",
-              "description": "https://${PA_ENGINE_PUBLIC_HOSTNAME}/headers",
+              "description": "https://${PA_ENGINE_PUBLIC_HOSTNAME}:${PA_ENGINE_PUBLIC_PORT_HTTPS}/headers",
               "manualOrderingEnabled": false,
               "resourceOrder": [],
               "applicationType": "Web",
@@ -216,7 +216,7 @@
           "expectedHostname": null,
           "basePath": null,
           "host": "${PF_ADMIN_PRIVATE_HOSTNAME}",
-          "port": 443,
+          "port": "${PF_ADMIN_PUBLIC_PORT_HTTPS}",
           "trustedCertificateGroupId": 2,
           "auditLevel": "OFF",
           "secure": true,
@@ -245,7 +245,7 @@
       },
       "pingFederateRuntime": {
           "description": null,
-          "issuer": "https://${PF_ENGINE_PUBLIC_HOSTNAME}/",
+          "issuer": "https://${PF_ENGINE_PUBLIC_HOSTNAME}:${PF_ENGINE_PUBLIC_PORT_HTTPS}/",
           "trustedCertificateGroupId": 2,
           "useProxy": false,
           "useSlo": false,
@@ -376,7 +376,7 @@
           {
               "id": 3,
               "host": "${PA_ENGINE_PUBLIC_HOSTNAME}",
-              "port": 443,
+              "port": "${PA_ENGINE_PUBLIC_PORT_HTTPS}",
               "agentResourceCacheTTL": 900,
               "keyPairId": 0,
               "trustedCertificateGroupId": 0
