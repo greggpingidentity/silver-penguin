@@ -38,13 +38,13 @@ pf.console.bind.address=0.0.0.0
 #   ---------------
 # This property defines the browser window or tab title for the administrative 
 # console, used to make separate instances identifiable.
-pf.console.title=${RELEASE_NAME}
+pf.console.title=SP-PingFederate
 
 #
 # This property defines the name of the PingFederate environment that will be
 # displayed in the administrative console, used to make separate environments
 # easily identifiable.
-pf.console.environment=${RELEASE_NAME}
+pf.console.environment=SP-PingFederate
 
 #   HTML page background image
 #   ---------------
