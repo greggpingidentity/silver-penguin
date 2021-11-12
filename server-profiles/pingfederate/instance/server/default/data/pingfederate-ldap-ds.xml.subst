@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ldap:ldap-sources xmlns:ldap="http://pingidentity.com/2004/09/ldap-ds">
     <ldap:ldap-source id="LDAP-35F51E43575A32C1A95DBAB45240CCBDD311BFA1" maskAttributeValues="false" ldapType="PingDirectory" ldapTypeDesc="PingDirectory" testOnBorrow="false" testOnReturn="false" createIfNecessary="true" minIdle="10" maxActive="100" maxWait="-1" timeBetweenEvictionRunsMillis="60000" readTimeoutMillis="3000" connTimeoutMillis="3000" verifyHost="true" dnsTtlMillis="60000" ldapDnsSrvPrefix="_ldap._tcp" ldapsDnsSrvPrefix="_ldaps._tcp">
-        <ldap:host>${RELEASE_NAME}-pingdirectory-cluster:1389</ldap:host>
+        <ldap:host>ping-poc-pingdirectory:389</ldap:host>
         <ldap:principal>cn=pingfederate</ldap:principal>
         <ldap:use-ssl>false</ldap:use-ssl>
         <ldap:use-dns-srv-records>false</ldap:use-dns-srv-records>
@@ -12,7 +12,7 @@
         <ldap:name>PingDirectory</ldap:name>
         <ldap:binaryAttributes/>
         <ldap:ldapHostTagList>
-            <ldap:tagEntry host="${RELEASE_NAME}-pingdirectory-cluster:1389" tags=""/>
+            <ldap:tagEntry host="ping-poc-pingdirectory:389" tags=""/>
         </ldap:ldapHostTagList>
     </ldap:ldap-source>
 </ldap:ldap-sources>
